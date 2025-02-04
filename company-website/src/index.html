@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ordering System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="Business Logo" id="logo">
+        <h1>MDT Sdn Bhd</h1>
+    </header>
+    <main>
+        <section id="menu">
+            <h2>Menu</h2>
+            <div class="product">
+                <img src="images/spana.jpg" alt="Spana">
+                <h3>Spana</h3>
+                <p>Best Spana in the world</p>
+                <p>$10.00</p>
+                <input type="number" id="quantity-spana" value="1" min="1">
+                <button onclick="addToCart('Spana', 10, document.getElementById('quantity-spana').value)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="images/helmet.jpg" alt="Helmet">
+                <h3>Helmet</h3>
+                <p>Best Helmet in the world</p>
+                <p>$15.00</p>
+                <input type="number" id="quantity-helmet" value="1" min="1">
+                <button onclick="addToCart('Helmet', 15, document.getElementById('quantity-helmet').value)">Add to Cart</button>
+            </div>
+        </section>
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <ul id="cart-items"></ul>
+            <p>Total: $<span id="cart-total">0</span></p>
+            <button onclick="checkout()">Checkout</button>
+        </section>
+    </main>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
