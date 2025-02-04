@@ -1,47 +1,46 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+let cart = [];
+let total = 0;
+
+function addToCart(product, price, quantity) {
+    cart.push({ product, price, quantity });
+    total += price * quantity;
+    document.getElementById('cart-total').innerText = total.toFixed(2);
+    updateCartItems();
+    notifyUser(`Added ${quantity} ${product}(s) to the cart.`);
 }
-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
+
+function updateCartItems() {
+    const cartItems = document.getElementById('cart-items');
+    cartItems.innerHTML = '';
+    cart.forEach(item => {
+        const li = document.createElement('li');
+        li.innerText = `${item.quantity} x ${item.product} - $${(item.price * item.quantity).toFixed(2)}`;
+        cartItems.appendChild(li);
+    });
 }
-#logo {
-    height: 50px; /* Adjust based on your logo size */
-    margin-right: 10px;
-    vertical-align: middle;
+
+function notifyUser(message) {
+    alert(message); // Simple notification, replace with more sophisticated notification if needed
 }
-main {
-    padding: 20px;
-}
-.product {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    background-color: #fff;
-}
-.product img {
-    width: 100px;
-    height: auto;
-    display: block;
-    margin-bottom: 10px;
-}
-button {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #218838;
-}
-#cart {
-    margin-top: 20px;
+
+function checkout() {
+    if (cart.length === 0) {
+        notifyUser('Your cart is empty.');
+        return;
+    }
+
+    const payLater = confirm('Do you want to pay later?');
+    if (payLater) {
+        notifyUser('You have chosen to pay later. An invoice will be sent to you.');
+        // Implement invoice sending logic here
+    } else {
+        notifyUser('Proceeding to payment.');
+        // Implement payment logic here
+    }
+
+    // Clear cart after checkout
+    cart = [];
+    total = 0;
+    document.getElementById('cart-total').innerText = total.toFixed(2);
+    updateCartItems();
 }
